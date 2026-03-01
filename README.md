@@ -128,7 +128,18 @@ npx skills add gaelic-ghost/apple-dev-skills \
 - [gaelic-ghost/productivity-skills](https://github.com/gaelic-ghost/productivity-skills)
 - [gaelic-ghost/python-skills](https://github.com/gaelic-ghost/python-skills)
 
-## Find Skills like these with the `skills` CLI by Vercel — [vercel-labs/skills](https://github.com/vercel-labs/skills)
+## Update Skills
+
+```bash
+# Check for available updates to installed Skills
+npx skills check
+# Update installed Skills
+npx skills update
+```
+
+## More resources for similar Skills
+
+### Find Skills like these with the `skills` CLI by Vercel — [vercel-labs/skills](https://github.com/vercel-labs/skills)
 
 ```bash
 npx skills find "xcode mcp"
@@ -136,7 +147,7 @@ npx skills find "xcodebuild test swiftpm"
 npx skills find "dash docset apple docs"
 ```
 
-## Find Skills like these with `Find Skills` Agent Skill by Vercel — [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
+### Find Skills like these with the `Find Skills` Agent Skill by Vercel — [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
 
 Install Vercel's skill bundle (which includes `find-skills`), then query the ecosystem:
 
@@ -148,6 +159,9 @@ npx skills add vercel-labs/agent-skills
 Learn more:
 - Skills catalog: https://skills.sh/
 - `find-skills`: https://skills.sh/vercel-labs/skills/find-skills
+
+
+Then ask your Agent for help finding a skill for "" or ""
 
 ## v1.0.0 Contents
 
@@ -259,7 +273,7 @@ Version `v1.6.0` improves grouped skill-pack organization and install guidance:
 
 - The structure is intentionally grouped by workflow domain while preserving skill-level discoverability.
 
-## Search Keywords
+## Keywords
 
 Xcode MCP, xcodebuild, xcodebuild test, xcrun, SwiftPM, swift build, swift test, swift run, swift package, swiftly, Swift toolchain, Dash docsets, Apple developer docs, Codex skills.
 
