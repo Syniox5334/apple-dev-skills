@@ -173,11 +173,11 @@ Version `v1.1.0` focuses on public portability and customization:
 
 - sanitizes user-specific path assumptions in skill content
 - removes tracked Python cache artifacts
-- adds per-skill customization guides:
-  - `bootstrap-swift-package/README.md`
-  - `swift-package-agents-maintainer/README.md`
-  - `dash-docset-search/README.md`
-  - `dash-docset-install-generate/README.md`
+- adds per-skill customization guides for:
+  - `bootstrap-swift-package`
+  - `swift-package-agents-maintainer`
+  - `dash-docset-search`
+  - `dash-docset-install-generate`
 
 ## v1.2.0 Highlights
 
