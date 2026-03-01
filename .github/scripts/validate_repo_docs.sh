@@ -16,8 +16,11 @@ echo "Validating skill directory layout..."
 skill_mds=()
 while IFS= read -r line; do
   skill_mds+=("$line")
-done < <(find . -mindepth 2 -maxdepth 2 -type f -name SKILL.md | sort)
-[[ ${#skill_mds[@]} -gt 0 ]] || fail "No skill directories found (missing */SKILL.md)."
+done < <(find . -type f -name SKILL.md \
+  -not -path "./.git/*" \
+  -not -path "./.github/*" \
+  | sort)
+[[ ${#skill_mds[@]} -gt 0 ]] || fail "No skill directories found (missing SKILL.md files)."
 
 for skill_md in "${skill_mds[@]}"; do
   skill_dir="${skill_md%/SKILL.md}"

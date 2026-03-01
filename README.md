@@ -78,6 +78,11 @@ Use the Vercel `skills` CLI against this repository to install any skill directo
 npx skills add gaelic-ghost/apple-dev-skills
 ```
 
+```bash
+# Install all skills with one command
+npx skills add gaelic-ghost/apple-dev-skills --all
+```
+
 The CLI will prompt you to choose which skill(s) to install from this repo.
 
 Notes on `skills` CLI flags (see https://www.npmjs.com/package/skills):
@@ -85,42 +90,43 @@ Notes on `skills` CLI flags (see https://www.npmjs.com/package/skills):
 - `-a` targets a specific agent (for example `codex`).
 - `-g` installs to the global profile.
 
-## Install individually by Skill
+## Install individually by Skill or Skill Pack
 
 ```bash
-# Xcode Skill Pack 1/4
-npx skills add gaelic-ghost/apple-dev-skills@apple-xcode-hybrid-orchestrator
+# Xcode Skill Pack (4 Skills)
+# Install Skill Packs as a set to ensure proper functionality
+# Use Xcode and Swift tooling safely and effectively with platform guidance
+npx skills add gaelic-ghost/apple-dev-skills \
+--skill apple-xcode-hybrid-orchestrator \
+--skill xcode-mcp-first-executor \
+--skill apple-swift-cli-fallback \
+--skill apple-dev-safety-and-docs
 ```
+
 ```bash
-# Xcode Skill Pack 2/4
-npx skills add gaelic-ghost/apple-dev-skills@xcode-mcp-first-executor
+# Dash.app Skills Pack (2 Skills)
+# Install Skill Packs as a set to ensure proper functionality
+# Search, Install, and Generate Dash.app Docsets and Cheatsheets
+npx skills add gaelic-ghost/apple-dev-skills \
+	--skill dash-docset-search \
+	--skill dash-docset-install-generate
 ```
-```bash
-# Xcode Skill Pack 3/4
-npx skills add gaelic-ghost/apple-dev-skills@apple-swift-cli-fallback
-```
-```bash
-# Xcode Skill Pack 4/4
-npx skills add gaelic-ghost/apple-dev-skills@apple-dev-safety-and-docs
-```
-```bash
-# Dash.app Skills Pack 1/2
-# Search Docsets and Cheatsheets 
-npx skills add gaelic-ghost/apple-dev-skills@
-```
-```bash
-# Dash.app Skills Pack 2/2
-# Install or Generate Docsets and Cheatsheets 
-npx skills add gaelic-ghost/apple-dev-skills@
-```
+
 ```bash
 # Bootstrap a Swift package with consistent defaults
-npx skills add gaelic-ghost/apple-dev-skills@bootstrap-swift-package
+npx skills add gaelic-ghost/apple-dev-skills \
+	--skill bootstrap-swift-package
 ```
 ```bash
-# Automate maintaining a consistent `AGENST.md` across many Swift repos
-npx skills add gaelic-ghost/apple-dev-skills@swift-package-agents-maintainer
+# Automate maintaining a consistent `AGENTS.md` across many Swift repos
+npx skills add gaelic-ghost/apple-dev-skills \
+	--skill swift-package-agents-maintainer
 ```
+
+## Check out my other Skills
+- [gaelic-ghost/a11y-skills](https://github.com/gaelic-ghost/a11y-skills)
+- [gaelic-ghost/productivity-skills](https://github.com/gaelic-ghost/productivity-skills)
+- [gaelic-ghost/python-skills](https://github.com/gaelic-ghost/python-skills)
 
 ## Find Skills like these with the `skills` CLI by Vercel — [vercel-labs/skills](https://github.com/vercel-labs/skills)
 
@@ -130,20 +136,13 @@ npx skills find "xcodebuild test swiftpm"
 npx skills find "dash docset apple docs"
 ```
 
-## Find Skills like these with `Find Skills` by Vercel — [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
+## Find Skills like these with `Find Skills` Agent Skill by Vercel — [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
 
 Install Vercel's skill bundle (which includes `find-skills`), then query the ecosystem:
 
 ```bash
 # Install vercel-labs agent-skills bundle
 npx skills add vercel-labs/agent-skills
-```
-
-```bash
-# Search for relevant skills with `skills find`
-npx skills find "xcode mcp swift"
-npx skills find "apple docs dash docsets"
-npx skills find "swift package workflow"
 ```
 
 Learn more:
@@ -223,25 +222,42 @@ Version `v1.5.0` introduces durable, in-skill customization workflows across the
 - adds a root `Customization Workflow Matrix` to improve discoverability and status tracking
 - updates CI validation to enforce customization-flow contracts (`customization.template.yaml`, `scripts/customization_config.py`, and `Interactive Customization Flow` section presence)
 
+## v1.6.0 Highlights
+
+Version `v1.6.0` improves grouped skill-pack organization and install guidance:
+
+- groups skills into workflow-domain folders for better repository navigation:
+  - `swift-xcode-tools`
+  - `dash-apple-swift-documentation`
+  - `apple-swift-repo-tools`
+  - `apple-swift-bootstraps`
+- updates root README install examples to use repo-root source plus `--skill` flags for pack-oriented installs
+- adds "install all" guidance with `--all` for one-command setup
+- updates CI validation to discover `SKILL.md` recursively so nested skill directories remain supported
+
 ## Repository Layout
 
 ```text
 .
 ├── README.md
 ├── LICENSE
-├── bootstrap-swift-package/
-├── swift-package-agents-maintainer/
-├── dash-docset-search/
-├── dash-docset-install-generate/
-├── apple-xcode-hybrid-orchestrator/
-├── xcode-mcp-first-executor/
-├── apple-swift-cli-fallback/
-└── apple-dev-safety-and-docs/
+├── apple-swift-bootstraps/
+│   └── bootstrap-swift-package/
+├── apple-swift-repo-tools/
+│   └── swift-package-agents-maintainer/
+├── dash-apple-swift-documentation/
+│   ├── dash-docset-search/
+│   └── dash-docset-install-generate/
+└── swift-xcode-tools/
+    ├── apple-xcode-hybrid-orchestrator/
+    ├── xcode-mcp-first-executor/
+    ├── apple-swift-cli-fallback/
+    └── apple-dev-safety-and-docs/
 ```
 
 ## Notes
 
-- The structure is intentionally flat at the repository root for ease of navigation and discoverability.
+- The structure is intentionally grouped by workflow domain while preserving skill-level discoverability.
 
 ## Search Keywords
 
