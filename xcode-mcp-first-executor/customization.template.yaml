@@ -1,0 +1,8 @@
+schemaVersion: 1
+isCustomized: false
+settings:
+  workspaceResolutionPolicy: "workspacePath-first"
+  mcpToolMappingSource: "references/mcp-tool-matrix.md"
+  retryPolicy: "one-timeout-retry"
+  handoffPayloadProfile: "intent-commands-reason"
+  mutationRoutingPolicy: "route-to-apple-dev-safety-and-docs"

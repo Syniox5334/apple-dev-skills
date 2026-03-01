@@ -1,6 +1,6 @@
 ---
 name: apple-dev-safety-and-docs
-description: Enforce mutation safety in Xcode-managed projects and route Apple and Swift documentation through Dash local-first policy with cooldown-gated advisory messaging. Use for risk checks, consent gating, docs fallback decisions, and skill-install guidance in Apple development workflows.
+description: Enforce mutation safety in Xcode-managed projects and route Apple and Swift documentation through Dash local-first policy with cooldown-gated advisory messaging. Use for risk checks, consent gating, docs fallback decisions, skill-install guidance, or when the user asks to customize this skills safety/docs behavior.
 ---
 
 # Apple Dev Safety and Docs
@@ -40,3 +40,27 @@ If any step is missing, do not perform direct mutation fallback.
 
 - `scripts/advisory_cooldown.py`
 - `scripts/detect_xcode_managed_scope.sh`
+
+## Interactive Customization Flow
+
+1. Load current effective customization settings first:
+- `uv run python scripts/customization_config.py effective`
+
+2. Ask targeted customization questions:
+- Use `references/customization-flow.md` to drive knob-by-knob questions.
+- Confirm desired behavior changes and safety constraints.
+
+3. Map requested changes to implementation files:
+- Update `SKILL.md`, `references/*`, and any runtime script files listed in `references/customization-flow.md`.
+
+4. Persist durable customization state:
+- Start from `customization.template.yaml` defaults.
+- Apply approved overrides with `uv run python scripts/customization_config.py apply --input <yaml-file>`.
+- Durable path: `~/.config/gaelic-ghost/apple-dev-skills/<skill-name>/customization.yaml`.
+- Optional override root: `APPLE_DEV_SKILLS_CONFIG_HOME`.
+
+5. Report resulting effective configuration:
+- Re-run `uv run python scripts/customization_config.py effective` and summarize final active settings.
+- If the user asks to remove customization state, run `uv run python scripts/customization_config.py reset`.
+
+Use `references/customization-flow.md` for skill-specific knobs, file mapping, guardrails, validation checks, and example requests.

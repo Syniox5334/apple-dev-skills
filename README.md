@@ -55,6 +55,19 @@ In short: if you or your users are building, testing, packaging, documenting, or
   - Use when creating or syncing canonical `AGENTS.md` policy files across Swift package repos.
   - Helps by keeping agent behavior consistent across repositories.
 
+## Customization Workflow Matrix
+
+| Skill | Chat Customization Flow (SKILL.md) | Durable Config (`template` + persisted `customization.yaml`) | Automation Knobs | README Migration Status |
+| --- | --- | --- | --- | --- |
+| `apple-xcode-hybrid-orchestrator` | Yes | Yes | No | README removed |
+| `xcode-mcp-first-executor` | Yes | Yes | No | README removed |
+| `apple-swift-cli-fallback` | Yes | Yes | No | README removed |
+| `apple-dev-safety-and-docs` | Yes | Yes | No | README removed |
+| `dash-docset-search` | Yes | Yes | Yes | README removed |
+| `dash-docset-install-generate` | Yes | Yes | Yes | README removed |
+| `bootstrap-swift-package` | Yes | Yes | Yes | README removed |
+| `swift-package-agents-maintainer` | Yes | Yes | Yes | README removed |
+
 ## Quick Start (Vercel Skills CLI)
 
 Use the Vercel `skills` CLI against this repository to install any skill directory you want to use. Or install them all conveniently with one command.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Apple Dev Safety and Docs"
   short_description: "Guard risky edits and enforce Dash-first doc workflow"
-  default_prompt: "Use $apple-dev-safety-and-docs to apply mutation safety gates in Xcode-managed projects and route documentation lookup through Dash local-first policy."
+  default_prompt: "Use -dev-safety-and-docs for mutation safety/docs routing tasks, and when customization is requested follow SKILL.md Interactive Customization Flow with scripts/customization_config.py and references/customization-flow.md."

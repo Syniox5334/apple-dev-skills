@@ -1,0 +1,8 @@
+schemaVersion: 1
+isCustomized: false
+settings:
+  defaultDiscoveryRoot: "~/Workspace"
+  directoryExclusions: ".*,.build,.swiftpm,node_modules,*.xcworkspace,*.xcodeproj,DerivedData"
+  defaultMode: "check"
+  canonicalAgentsPathMode: "asset-default"
+  reportFormat: "summary-line"

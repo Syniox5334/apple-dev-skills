@@ -21,9 +21,11 @@ done < <(find . -mindepth 2 -maxdepth 2 -type f -name SKILL.md | sort)
 
 for skill_md in "${skill_mds[@]}"; do
   skill_dir="${skill_md%/SKILL.md}"
-  [[ -f "$skill_dir/README.md" ]] || fail "Missing $skill_dir/README.md"
   [[ -f "$skill_dir/agents/openai.yaml" ]] || fail "Missing $skill_dir/agents/openai.yaml"
+  [[ -f "$skill_dir/customization.template.yaml" ]] || fail "Missing $skill_dir/customization.template.yaml"
+  [[ -f "$skill_dir/scripts/customization_config.py" ]] || fail "Missing $skill_dir/scripts/customization_config.py"
   [[ -d "$skill_dir/references" ]] || fail "Missing $skill_dir/references/"
+  grep -q "^## Interactive Customization Flow$" "$skill_md" || fail "Missing '## Interactive Customization Flow' in $skill_md"
 
   # Some skills are policy-only and intentionally do not ship scripts.
   if grep -q "scripts/" "$skill_md"; then

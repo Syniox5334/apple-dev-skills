@@ -1,4 +1,4 @@
 interface:
   display_name: "Dash Docset Search"
   short_description: "Search and reason about Dash docsets safely"
-  default_prompt: "Use $dash-docset-search and references/automation-prompts.md to run or adapt Codex App and codex exec automation prompts for Dash search and reporting workflows."
+  default_prompt: "Use -docset-search for Dash docset search tasks, and when customization is requested follow SKILL.md Interactive Customization Flow with scripts/customization_config.py and references/customization-flow.md."

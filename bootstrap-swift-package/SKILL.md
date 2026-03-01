@@ -1,6 +1,6 @@
 ---
 name: bootstrap-swift-package
-description: Bootstrap new Swift Package Manager projects with consistent defaults and fast setup. Use when creating a new Swift package (library, executable, or tool), scaffolding package structure, applying standard platform/version defaults, always initializing git for a package, and running first-step safety checks plus build/test validation.
+description: Bootstrap new Swift Package Manager projects with consistent defaults and fast setup. Use when creating a new Swift package (library, executable, or tool), scaffolding package structure, applying standard platform/version defaults, initializing git, running first-step validation, or when the user asks to customize bootstrap defaults in this skill.
 ---
 
 # Bootstrap Swift Package
@@ -68,3 +68,27 @@ Prefer the bundled script for deterministic setup.
 ### assets/
 
 - `assets/AGENTS.md`: Template copied into each new package repository to set repository expectations for Swift Package Manager workflows.
+
+## Interactive Customization Flow
+
+1. Load current effective customization settings first:
+- `uv run python scripts/customization_config.py effective`
+
+2. Ask targeted customization questions:
+- Use `references/customization-flow.md` to drive knob-by-knob questions.
+- Confirm desired behavior changes and safety constraints.
+
+3. Map requested changes to implementation files:
+- Update `SKILL.md`, `references/*`, and any runtime script files listed in `references/customization-flow.md`.
+
+4. Persist durable customization state:
+- Start from `customization.template.yaml` defaults.
+- Apply approved overrides with `uv run python scripts/customization_config.py apply --input <yaml-file>`.
+- Durable path: `~/.config/gaelic-ghost/apple-dev-skills/<skill-name>/customization.yaml`.
+- Optional override root: `APPLE_DEV_SKILLS_CONFIG_HOME`.
+
+5. Report resulting effective configuration:
+- Re-run `uv run python scripts/customization_config.py effective` and summarize final active settings.
+- If the user asks to remove customization state, run `uv run python scripts/customization_config.py reset`.
+
+Use `references/customization-flow.md` for skill-specific knobs, file mapping, guardrails, validation checks, and example requests.

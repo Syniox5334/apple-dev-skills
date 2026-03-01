@@ -1,4 +1,4 @@
 interface:
   display_name: "Dash Install and Generate"
   short_description: "Install or generate Dash docsets and cheatsheets"
-  default_prompt: "Use $dash-docset-install-generate and references/automation-prompts.md to prepare guarded Codex App and codex exec automation prompts for Dash install or generation flows."
+  default_prompt: "Use -docset-install-generate for Dash install/generation tasks, and when customization is requested follow SKILL.md Interactive Customization Flow with scripts/customization_config.py and references/customization-flow.md."

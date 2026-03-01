@@ -1,6 +1,6 @@
 ---
 name: apple-xcode-hybrid-orchestrator
-description: Orchestrate Apple and Swift development workflows with an Xcode MCP-first policy and automatic fallback to official Apple and Swift CLI tooling. Use when tasks involve Xcode, SwiftPM, build or test execution, toolchain checks, docs lookup, or mutation-risk decisions across mixed MCP and CLI environments.
+description: Orchestrate Apple and Swift development workflows with an Xcode MCP-first policy and automatic fallback to official Apple and Swift CLI tooling. Use when tasks involve Xcode, SwiftPM, build/test execution, toolchain checks, docs lookup, mutation-risk decisions, or when the user asks to customize orchestration policy in this skill.
 ---
 
 # Apple Xcode Hybrid Orchestrator
@@ -43,3 +43,27 @@ Use this skill as the entrypoint for Apple and Swift tasks.
 ## Scripts
 
 - `scripts/advisory_cooldown.py`
+
+## Interactive Customization Flow
+
+1. Load current effective customization settings first:
+- `uv run python scripts/customization_config.py effective`
+
+2. Ask targeted customization questions:
+- Use `references/customization-flow.md` to drive knob-by-knob questions.
+- Confirm desired behavior changes and safety constraints.
+
+3. Map requested changes to implementation files:
+- Update `SKILL.md`, `references/*`, and any runtime script files listed in `references/customization-flow.md`.
+
+4. Persist durable customization state:
+- Start from `customization.template.yaml` defaults.
+- Apply approved overrides with `uv run python scripts/customization_config.py apply --input <yaml-file>`.
+- Durable path: `~/.config/gaelic-ghost/apple-dev-skills/<skill-name>/customization.yaml`.
+- Optional override root: `APPLE_DEV_SKILLS_CONFIG_HOME`.
+
+5. Report resulting effective configuration:
+- Re-run `uv run python scripts/customization_config.py effective` and summarize final active settings.
+- If the user asks to remove customization state, run `uv run python scripts/customization_config.py reset`.
+
+Use `references/customization-flow.md` for skill-specific knobs, file mapping, guardrails, validation checks, and example requests.

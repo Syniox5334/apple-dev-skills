@@ -1,6 +1,6 @@
 ---
 name: dash-docset-install-generate
-description: Install, guide installation, and generate Dash.app docsets or cheatsheets on macOS. Use when the user asks to add missing Dash docsets, install from built-in or contributed sources, install cheat sheets, subscribe to feeds, or generate custom docsets and then verify installation.
+description: Install, guide installation, and generate Dash.app docsets or cheatsheets on macOS. Use when the user asks to add missing Dash docsets, install from built-in or contributed sources, install cheat sheets, subscribe to feeds, generate custom docsets, verify installation, or customize this skills install/generation policy.
 ---
 
 # Dash Install and Generate
@@ -126,3 +126,27 @@ If MCP is unavailable:
 ## Optional Visual Troubleshooting
 
 If Dash interface behavior needs verification, use the `$screenshot` skill if it is available in the user's environment.
+
+## Interactive Customization Flow
+
+1. Load current effective customization settings first:
+- `uv run python scripts/customization_config.py effective`
+
+2. Ask targeted customization questions:
+- Use `references/customization-flow.md` to drive knob-by-knob questions.
+- Confirm desired behavior changes and safety constraints.
+
+3. Map requested changes to implementation files:
+- Update `SKILL.md`, `references/*`, and any runtime script files listed in `references/customization-flow.md`.
+
+4. Persist durable customization state:
+- Start from `customization.template.yaml` defaults.
+- Apply approved overrides with `uv run python scripts/customization_config.py apply --input <yaml-file>`.
+- Durable path: `~/.config/gaelic-ghost/apple-dev-skills/<skill-name>/customization.yaml`.
+- Optional override root: `APPLE_DEV_SKILLS_CONFIG_HOME`.
+
+5. Report resulting effective configuration:
+- Re-run `uv run python scripts/customization_config.py effective` and summarize final active settings.
+- If the user asks to remove customization state, run `uv run python scripts/customization_config.py reset`.
+
+Use `references/customization-flow.md` for skill-specific knobs, file mapping, guardrails, validation checks, and example requests.

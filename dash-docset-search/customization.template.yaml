@@ -1,0 +1,8 @@
+schemaVersion: 1
+isCustomized: false
+settings:
+  fallbackOrder: "mcp,http,url-service"
+  defaultMaxResults: 20
+  defaultSearchSnippets: true
+  ftsEnablePolicy: "enable-when-disabled"
+  troubleshootingPreference: "api-first"

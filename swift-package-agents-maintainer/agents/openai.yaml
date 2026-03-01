@@ -1,4 +1,4 @@
 interface:
   display_name: "Swift Package AGENTS Maintainer"
   short_description: "Keep AGENTS.md consistent across Swift package repos"
-  default_prompt: "Use $swift-package-agents-maintainer and references/automation-prompts.md to set up Codex App and codex exec automations for AGENTS.md drift checks and sync runs."
+  default_prompt: "Use -package-agents-maintainer for AGENTS sync tasks, and when customization is requested follow SKILL.md Interactive Customization Flow with scripts/customization_config.py and references/customization-flow.md."

@@ -1,4 +1,4 @@
 interface:
   display_name: "Apple Swift CLI Fallback"
   short_description: "Run official Apple and Swift fallback commands safely"
-  default_prompt: "Use $apple-swift-cli-fallback to execute official xcodebuild, xcrun, and swift fallback commands with concise MCP advisories and allowlist guidance."
+  default_prompt: "Use -swift-cli-fallback for official CLI fallback tasks, and when customization is requested follow SKILL.md Interactive Customization Flow with scripts/customization_config.py and references/customization-flow.md."

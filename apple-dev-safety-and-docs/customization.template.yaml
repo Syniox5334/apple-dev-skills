@@ -1,0 +1,8 @@
+schemaVersion: 1
+isCustomized: false
+settings:
+  mutationScopePatterns: ".xcodeproj,.pbxproj,.xcworkspace"
+  requireExplicitTypedConfirmation: true
+  docsRoutingOrder: "dash-mcp,dash-local,official-web"
+  advisoryCooldownDays: 21
+  missingDocsetMessageMode: "install-guidance"

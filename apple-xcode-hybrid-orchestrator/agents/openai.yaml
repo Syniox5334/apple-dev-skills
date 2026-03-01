@@ -1,4 +1,4 @@
 interface:
   display_name: "Apple Xcode Hybrid Orchestrator"
   short_description: "Route Apple tasks via MCP-first hybrid workflow"
-  default_prompt: "Use $apple-xcode-hybrid-orchestrator to classify this Apple/Xcode task, apply MCP-first execution, and route safe fallbacks with docs and mutation guardrails."
+  default_prompt: "Use -xcode-hybrid-orchestrator for MCP-first orchestration tasks, and when customization is requested follow SKILL.md Interactive Customization Flow with scripts/customization_config.py and references/customization-flow.md."

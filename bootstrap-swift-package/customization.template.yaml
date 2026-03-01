@@ -1,0 +1,9 @@
+schemaVersion: 1
+isCustomized: false
+settings:
+  defaultPackageType: "library"
+  defaultPlatformPreset: "multiplatform"
+  defaultVersionProfile: "current-minus-one"
+  initializeGit: true
+  copyAgentsMd: true
+  namingPattern: "pascal-case"

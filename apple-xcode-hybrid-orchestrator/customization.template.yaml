@@ -1,0 +1,8 @@
+schemaVersion: 1
+isCustomized: false
+settings:
+  intentBucketsProfile: "default"
+  mcpRetryCount: 1
+  requireExplicitMutationOptInForFilesystemFallback: true
+  docsPolicySkill: "apple-dev-safety-and-docs"
+  advisoryCooldownDays: 21

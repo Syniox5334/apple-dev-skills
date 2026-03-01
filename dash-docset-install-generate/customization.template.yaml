@@ -1,0 +1,8 @@
+schemaVersion: 1
+isCustomized: false
+settings:
+  installSourcePriority: "built-in,user-contributed,cheatsheet,generation"
+  requireExplicitApprovalForYes: true
+  generationPolicy: "automate-stable"
+  lastResortPolicy: "github-or-stackoverflow-last"
+  verificationOrder: "mcp,http,ui"
