@@ -212,6 +212,17 @@ Version `v1.4.2` applies final README cleanup before roadmap-based planning:
 - cleans up README footer content and license section wording
 - keeps root documentation structure consistent with latest tag metadata
 
+## v1.5.0 Highlights
+
+Version `v1.5.0` introduces durable, in-skill customization workflows across the full bundle:
+
+- replaces per-skill customization `README.md` files with `Interactive Customization Flow` sections in each `SKILL.md`
+- adds per-skill `customization.template.yaml` defaults and persistent user customization state at `~/.config/gaelic-ghost/apple-dev-skills/<skill-name>/customization.yaml`
+- adds `scripts/customization_config.py` in each skill for `path`, `effective`, `apply`, and `reset` config operations
+- adds `references/customization-flow.md` in each skill to provide a structured chat-first customization procedure
+- adds a root `Customization Workflow Matrix` to improve discoverability and status tracking
+- updates CI validation to enforce customization-flow contracts (`customization.template.yaml`, `scripts/customization_config.py`, and `Interactive Customization Flow` section presence)
+
 ## Repository Layout
 
 ```text
