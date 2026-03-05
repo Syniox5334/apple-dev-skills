@@ -1,24 +1,46 @@
-# Automation Prompts
+# Bootstrap Automation Contract
 
-## Automation Fit
+## Purpose
 
-- Codex App automation: Guarded. Best for one-off or event-driven scaffolding, not high-frequency recurring schedules.
-- Codex CLI automation: Strong. Suitable for deterministic non-interactive package bootstrap runs.
+Provide one consistent automation contract for deterministic Swift package scaffold runs.
 
-## Prerequisites
+## Inputs
 
-- `swift` and `git` available on `PATH`.
-- Write access to `<DESTINATION_DIR>`.
-- `assets/AGENTS.md` and `scripts/bootstrap_swift_package.sh` present in this skill.
-- `assets/AGENTS.md` is treated as the full template including shared `apple-swift-core` baseline guidance.
-- Explicit values prepared for required placeholders.
+- `package_name`
+- `package_type`
+- `destination_dir`
+- `platform_preset`
+- `version_profile`
+- `skip_validation`
 
-## Codex App Automation Prompt Template
+## Constraints
+
+- `swift` and `git` must be on `PATH`.
+- `assets/AGENTS.md` and `scripts/bootstrap_swift_package.sh` must exist.
+- Do not overwrite a non-empty target directory.
+- Keep changes scoped to `<DESTINATION_DIR>/<PACKAGE_NAME>`.
+
+## Status Values
+
+- `success`
+- `blocked`
+- `failed`
+
+## Output
+
+- `status`
+- `path_type`
+- `path`
+- normalized `type`, `platform`, and `version_profile`
+- validation result
+- one concise follow-up note
+
+## Codex App Prompt Template
 
 ```text
 Use $apple-swift-package-bootstrap.
 
-This automation is guarded for app scheduling. Run only when a package scaffold is explicitly requested.
+Run this workflow only when a package scaffold is explicitly requested.
 
 Create a Swift package with:
 - Name: <PACKAGE_NAME>
@@ -35,13 +57,16 @@ Execution requirements:
 4) If `<SKIP_VALIDATION>` is `false`, require `swift build` and `swift test` to pass.
 5) Do not modify files outside `<DESTINATION_DIR>/<PACKAGE_NAME>`.
 
-Output requirements:
-- Return a short status with created path, package type, platform preset, version profile, and validation result.
-- Include exact command used.
-- If blocked, return the blocker and the next required action.
+Return the documented contract only:
+- `status`
+- `path_type`
+- `path`
+- normalized scaffold options
+- validation result
+- blocker or next step when needed
 ```
 
-## Codex CLI Automation Prompt Template
+## Codex CLI Prompt Template
 
 ```text
 Use $apple-swift-package-bootstrap for a deterministic CLI automation run.
@@ -65,17 +90,19 @@ Verification:
 - Confirm `Package.swift`, `AGENTS.md`, `Tests/`, and `.git` exist.
 - If validation is enabled, verify `swift build` and `swift test` success.
 
-Return format:
+Return contract:
 - `status: success|blocked|failed`
+- `path_type: <primary|fallback>`
 - `path: <resolved path>`
-- `checks: <passed checks>`
+- `options: <normalized type/platform/version profile>`
+- `checks: <passed checks or skipped>`
 - `notes: <brief follow-up>`
 ```
 
 ## Customization Knobs
 
 - `<PACKAGE_NAME>`: Swift package name.
-- `<PACKAGE_TYPE>`: `library`, `executable`, or `tool`.
+- `<PACKAGE_TYPE>`: `library`, `executable`, or explicit passthrough `tool`.
 - `<DESTINATION_DIR>`: Absolute or workspace-relative parent directory.
 - `<PLATFORM_PRESET>`: `mac`, `mobile`, or `multiplatform` (aliases accepted by script).
 - `<VERSION_PROFILE>`: `latest-major`, `current-minus-one`, or `current-minus-two` (aliases accepted).
@@ -87,10 +114,3 @@ Return format:
 - Stop if target exists and is non-empty.
 - Stop if script invocation fails at any step.
 - Never continue after failed validation unless `<SKIP_VALIDATION>` is explicitly `true`.
-
-## Expected Output Shape
-
-- One concise execution summary.
-- Command invocation shown once.
-- Validation status clearly stated.
-- Blockers or failures reported with exact next action.

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Apple Xcode Workflow Execute"
-  short_description: "Run Apple and Swift tasks with MCP-first hybrid policy"
-  default_prompt: "Use apple-xcode-workflow-execute for Apple and Swift execution tasks that need MCP-first routing, official CLI fallback, mutation safety gates, and Dash-local-first docs handling."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apple Dash Docsets"
+  short_description: "Manage Dash search, install, and generation workflows"
+  default_prompt: "Use apple-dash-docsets for Dash docset and cheatsheet work that needs a straight stage flow from search to install to generate, explicit fallback order, and clear handoff behavior."

@@ -21,6 +21,7 @@ echo "Validating roadmap presence..."
 echo "Validating root docs presence..."
 [[ -f README.md ]] || fail "Missing README.md at repo root."
 [[ -f AGENTS.md ]] || fail "Missing AGENTS.md at repo root."
+[[ -f WORKFLOWS.md ]] || fail "Missing WORKFLOWS.md at repo root."
 
 echo "Validating authoritative resource links in root docs..."
 required_resource_strings=(
@@ -41,6 +42,14 @@ done
 
 echo "Validating README maintainer pointer..."
 require_contains "README.md" 'Maintainers: authoritative skill-authoring resources live in `AGENTS.md`.'
+require_contains "README.md" 'WORKFLOWS.md'
+
+echo "Validating workflow document structure..."
+require_contains "WORKFLOWS.md" "## Repo Workflow Map"
+require_contains "WORKFLOWS.md" '## `apple-skills-router`'
+require_contains "WORKFLOWS.md" '## `apple-xcode-workflow`'
+require_contains "WORKFLOWS.md" '## `apple-dash-docsets`'
+require_contains "WORKFLOWS.md" '## `apple-swift-package-bootstrap`'
 
 echo "Validating skill directory layout..."
 skill_mds=()
@@ -61,7 +70,20 @@ for skill_md in "${skill_mds[@]}"; do
   [[ -f "$skill_dir/customization.template.yaml" ]] || fail "Missing $skill_dir/customization.template.yaml"
   [[ -f "$skill_dir/scripts/customization_config.py" ]] || fail "Missing $skill_dir/scripts/customization_config.py"
   [[ -d "$skill_dir/references" ]] || fail "Missing $skill_dir/references/"
-  grep -q "^## Interactive Customization Flow$" "$skill_md" || fail "Missing '## Interactive Customization Flow' in $skill_md"
+
+  for heading in \
+    "^## Purpose$" \
+    "^## When To Use$" \
+    "^## Single-Path Workflow$" \
+    "^## Inputs$" \
+    "^## Outputs$" \
+    "^## Guards and Stop Conditions$" \
+    "^## Fallbacks and Handoffs$" \
+    "^## Customization$" \
+    "^## References$"
+  do
+    grep -q "$heading" "$skill_md" || fail "Missing required heading in $skill_md: ${heading#^}"
+  done
 
   # Some skills are policy-only and intentionally do not ship scripts.
   if grep -q "scripts/" "$skill_md"; then
@@ -76,13 +98,9 @@ for skill_md in "${skill_mds[@]}"; do
   grep -Eiq "recommend.{0,120}references/snippets/apple-swift-core.md|references/snippets/apple-swift-core.md.{0,120}recommend" "$skill_md" || fail "Missing snippet recommendation guidance in $skill_md"
 done
 
-echo "Validating root README release continuity..."
-latest_tag="$(git tag --sort=version:refname | tail -n 1)"
-[[ -n "$latest_tag" ]] || fail "No git tags found; cannot validate README release coverage."
-
-escaped_tag="$(printf '%s' "$latest_tag" | sed 's/\./\\./g')"
-if ! grep -Eq "^## ${escaped_tag} (Highlights|Contents)$" README.md; then
-  fail "README.md missing heading for latest tag ${latest_tag} (expected '## ${latest_tag} Highlights' or '## ${latest_tag} Contents')."
-fi
+echo "Validating workflow document content..."
+grep -q '```mermaid' WORKFLOWS.md || fail "WORKFLOWS.md must contain Mermaid diagrams."
+grep -q 'Agent ↔ User UX' WORKFLOWS.md || fail "WORKFLOWS.md must describe Agent ↔ User UX."
+grep -q 'Failure / Fallback / Handoff States' WORKFLOWS.md || fail "WORKFLOWS.md must describe failure, fallback, and handoff states."
 
 echo "All validation checks passed."

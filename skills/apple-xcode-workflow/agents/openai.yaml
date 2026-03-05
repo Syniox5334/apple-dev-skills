@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apple Xcode Workflow"
+  short_description: "Run Apple and Swift work with MCP-first fallback policy"
+  default_prompt: "Use apple-xcode-workflow for Apple and Swift tasks that need one MCP-first execution engine, official CLI fallback, explicit mutation guards, and local-first docs guidance."

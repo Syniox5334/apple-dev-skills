@@ -1,8 +1,10 @@
 # Swift Package Type Guide
 
-- `library`: Reusable code consumed by other packages/apps. Default choice.
-- `executable`: Command-line app with an entry point.
-- `tool`: Command-line tool with swift-argument-parser.
+## Package Types
+
+- `library`: reusable code consumed by other packages or apps. Default choice.
+- `executable`: runnable command-line package with an entry point. Default CLI choice.
+- `tool`: advanced explicit passthrough to `swift package init --type tool`. Use this only when the active Swift toolchain's tool template is explicitly desired; otherwise prefer `executable`.
 
 Choose `library` unless you explicitly need a runnable CLI (`executable` or `tool`).
 

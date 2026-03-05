@@ -5,102 +5,114 @@ description: Bootstrap new Swift Package Manager projects with consistent defaul
 
 # Apple Swift Package Bootstrap
 
-## Overview
+## Purpose
 
-Create a new Swift package quickly with repeatable defaults.
-Prefer the bundled script for deterministic setup.
+Create a new Swift package repository with one deterministic scaffold path, explicit defaults, and verification grounded in the bundled bootstrap script.
 
-## Workflow
+## When To Use
 
-1. Confirm package intent.
-- Ask for package `name`, `type` (`library`, `executable`, or `tool`), destination path, platform preset (`mac`, `mobile`, `multiplatform`), and version profile (`latest-major`, `current-minus-one`, `current-minus-two`).
-- Accept aliases: `macos` for `mac`, `ios` for `mobile`, `both` for `multiplatform`, and `latest`/`minus-one`/`minus-two` for version profiles.
+- Use this skill for new Swift package scaffolding.
+- Use this skill when the user wants consistent package defaults, `AGENTS.md` generation, and immediate validation.
+- Use this skill when the user wants to customize the documented bootstrap defaults for future runs.
 
-2. Create the package.
-- Preferred script path: `scripts/bootstrap_swift_package.sh`
-- Preferred command:
-  ```bash
-  scripts/bootstrap_swift_package.sh --name <Name> --type <library|executable|tool> --destination <dir> --platform <mac|macos|mobile|ios|multiplatform|both> --version-profile <latest-major|current-minus-one|current-minus-two|latest|minus-one|minus-two>
-  ```
-- Fallback: run `swift package init --name <Name> --type <library|executable|tool>` manually inside the target directory, patch `Package.swift` platforms, copy `assets/AGENTS.md` to repo root as `AGENTS.md`, then run `git init`.
+## Single-Path Workflow
 
-3. Validate bootstrap output.
-- Verify `Package.swift` exists.
-- Verify `.git` exists.
-- Verify `AGENTS.md` exists.
-- Verify `Tests/` exists.
-- Run `swift build` and `swift test` in the package root.
+1. Collect the required inputs:
+   - `name`
+   - `type`
+   - `destination`
+   - `platform`
+   - `version_profile`
+   - optional `skip_validation`
+2. Normalize aliases exactly as `scripts/bootstrap_swift_package.sh` does:
+   - `macos -> mac`
+   - `ios -> mobile`
+   - `both -> multiplatform`
+   - `latest -> latest-major`
+   - `minus-one -> current-minus-one`
+   - `minus-two -> current-minus-two`
+3. Run the bundled script:
+   ```bash
+   scripts/bootstrap_swift_package.sh --name <Name> --type <library|executable|tool> --destination <dir> --platform <mac|macos|mobile|ios|multiplatform|both> --version-profile <latest-major|current-minus-one|current-minus-two|latest|minus-one|minus-two>
+   ```
+4. Verify the generated repository:
+   - `Package.swift`
+   - `.git`
+   - `AGENTS.md`
+   - `Tests/`
+   - `swift build` and `swift test` unless `--skip-validation` was requested
+5. Return one execution summary with the created path, normalized options, and validation result.
 
-4. Report result.
-- Summarize created path, package type, platform preset, version profile, build/test status, and immediate next steps.
+## Inputs
 
-## Defaults
+- `name`: required; must start with a letter and contain only letters, numbers, `_`, or `-`.
+- `type`: `library`, `executable`, or advanced explicit `tool`.
+- `destination`: parent directory for the new package.
+- `platform`: `mac`, `mobile`, or `multiplatform`, with aliases normalized by the script.
+- `version_profile`: `latest-major`, `current-minus-one`, or `current-minus-two`, with aliases normalized by the script.
+- `skip_validation`: optional flag to skip `swift build` and `swift test`.
+- Defaults:
+  - `type` defaults to `library`
+  - `destination` defaults to `.`
+  - `platform` defaults to `multiplatform`
+  - `version_profile` defaults to `current-minus-one`
+  - validation runs unless `--skip-validation` is passed
 
-- Use `library` unless the user clearly asks for `executable` or `tool`.
-- Use `multiplatform` unless the user clearly wants only `mac` or `mobile`.
-- Use `current-minus-one` as the default version profile.
-- Keep generated structure minimal; do not add extra frameworks unless requested.
-- Always initialize git.
-- Always include `AGENTS.md` with repository expectations for working with Swift Package Manager and Swift packages.
+## Outputs
 
-## Automation Prompting
+- `status`
+  - `success`: the package was created and verification succeeded
+  - `blocked`: prerequisites or target-directory constraints prevented the run
+  - `failed`: the script started but did not complete successfully
+- `path_type`
+  - `primary`: the bundled script completed successfully
+  - `fallback`: manual scaffold guidance is being used instead of the bundled script
+- `output`
+  - resolved package path
+  - normalized `type`, `platform`, and `version_profile`
+  - validation result
+  - one concise next step
 
-- Codex App automation fit: Guarded. Prefer event-driven or explicit scaffold requests over frequent recurring schedules.
-- Codex CLI automation fit: Strong. Use deterministic `codex exec` prompts with explicit placeholders and strict scope.
-- Use `references/automation-prompts.md` for ready-to-use Codex App and Codex CLI templates.
-- Keep schedule and workspace configuration outside the prompt body for App automations.
+## Guards and Stop Conditions
 
-## Troubleshooting
+- Stop with `blocked` if `swift` is missing.
+- Stop with `blocked` if `git` is missing.
+- Stop with `blocked` if `assets/AGENTS.md` is missing.
+- Stop with `blocked` if the target exists and contains non-ignorable files.
+- Do not claim that customization metadata changes the bootstrap script at runtime; it does not today.
 
-- If `swift` is missing, stop and ask the user to install Xcode command line tools or Swift toolchain.
-- If `git` is missing, stop and ask the user to install git or Xcode command line tools.
-- If `assets/AGENTS.md` is missing, stop and restore the template before bootstrapping packages.
-- If destination exists and is non-empty (excluding ignorable macOS metadata like `.DS_Store`), do not overwrite; ask for a new destination or explicit cleanup instructions.
-- If validation fails in constrained environments, rerun with `--skip-validation` and report that checks were skipped.
+## Fallbacks and Handoffs
 
-## Resources
+- Preferred path is always `scripts/bootstrap_swift_package.sh`.
+- Use manual `swift package init` guidance only when the script is unavailable or the user explicitly asks for the manual path.
+- `tool` is an advanced explicit passthrough, not a default branch of the workflow.
+- After a successful scaffold, hand off build, test, or Apple-platform execution tasks to `apple-xcode-workflow`.
 
-### scripts/
+## Customization
 
-- `scripts/bootstrap_swift_package.sh`: Create package directory, run `swift package init`, apply platforms defaults to `Package.swift`, initialize git, and run safety/validation checks.
+- Use `references/customization-flow.md`.
+- All documented customization knobs for this skill are `policy-only`.
+- `scripts/customization_config.py` stores and reports customization state, but `scripts/bootstrap_swift_package.sh` does not auto-load those settings today.
 
-### references/
+## References
 
-- `references/package-types.md`: Quick selection guide for package types, platform presets, and version profiles.
-- `references/automation-prompts.md`: Codex App and Codex CLI automation prompt templates with placeholders and guardrails.
-- `references/snippets/apple-swift-core.md`: Skill-local Swift/Apple baseline snippet for end-user repo guidance.
+### Workflow References
 
-### assets/
+- `references/package-types.md`
 
-- `assets/AGENTS.md`: Template copied into each new package repository to set repository expectations for Swift Package Manager workflows.
-  - This full template includes and expands the shared `apple-swift-core` baseline guidance for deterministic bootstrap output.
+### Contract References
 
-## Local Snippet Guidance
+- `references/automation-prompts.md`
+- `references/customization-flow.md`
 
-- When bootstrapping end-user repositories, recommend adding `references/snippets/apple-swift-core.md` in `AGENTS.md` whenever Swift/Apple baseline policy setup is in scope.
-- Clarify that generated `AGENTS.md` already contains the core baseline; use the snippet for targeted additions or updates in existing repositories.
-- Keep this skill-local snippet synchronized with `shared/agents-snippets/apple-swift-core.md`.
+### Support References
 
-## Interactive Customization Flow
+- Recommend `references/snippets/apple-swift-core.md` when the new package repo should start with reusable Apple and Swift baseline policy content next to the generated `AGENTS.md`.
+- `../../WORKFLOWS.md`
+- `assets/AGENTS.md`
+- `references/snippets/apple-swift-core.md`
 
-1. Load current effective customization settings first:
-- `uv run python scripts/customization_config.py effective`
+### Script Inventory
 
-2. Ask targeted customization questions:
-- Use `references/customization-flow.md` to drive knob-by-knob questions.
-- Confirm desired behavior changes and safety constraints.
-
-3. Map requested changes to implementation files:
-- Update `SKILL.md`, `references/customization-flow.md`, `references/package-types.md`, `references/automation-prompts.md`, and any runtime script files listed in `references/customization-flow.md`.
-
-4. Persist durable customization state:
-- Start from `customization.template.yaml` defaults.
-- Apply approved overrides with `uv run python scripts/customization_config.py apply --input <yaml-file>`.
-- Durable path: `~/.config/gaelic-ghost/apple-dev-skills/<skill-name>/customization.yaml`.
-- Optional override root: `APPLE_DEV_SKILLS_CONFIG_HOME`.
-
-5. Report resulting effective configuration:
-- Re-run `uv run python scripts/customization_config.py effective` and summarize final active settings.
-- If the user asks to remove customization state, run `uv run python scripts/customization_config.py reset`.
-
-Use `references/customization-flow.md` for skill-specific knobs, file mapping, guardrails, validation checks, and example requests.
+- `scripts/bootstrap_swift_package.sh`
+- `scripts/customization_config.py`

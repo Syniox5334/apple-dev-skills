@@ -1,55 +1,37 @@
-# Customization Flow
+# Bootstrap Customization Contract
 
 ## Purpose
 
-Adjust bootstrap defaults and generation behavior for team-specific Swift package conventions.
-Treat generated `AGENTS.md` as the full scaffold policy file that incorporates the shared `apple-swift-core` baseline.
+Adjust the documented bootstrap defaults while keeping runtime behavior grounded in the actual script.
 
-## Customization Knobs
+## Knobs
 
-- `defaultPackageType`
-- `defaultPlatformPreset`
-- `defaultVersionProfile`
-- `initializeGit`
-- `copyAgentsMd`
-- `namingPattern`
+| Knob | Default | Status | Effect |
+| --- | --- | --- | --- |
+| `defaultPackageType` | `library` | `policy-only` | Sets the documented default scaffold type. |
+| `defaultPlatformPreset` | `multiplatform` | `policy-only` | Sets the documented default platform preset. |
+| `defaultVersionProfile` | `current-minus-one` | `policy-only` | Sets the documented default version profile. |
+| `initializeGit` | `true` | `policy-only` | Describes whether docs present git initialization as default behavior. |
+| `copyAgentsMd` | `true` | `policy-only` | Describes whether docs present `AGENTS.md` copy-in as default behavior. |
+| `namingPattern` | `pascal-case` | `policy-only` | Describes the preferred package naming convention in docs and examples. |
 
-## Interactive Question Sequence
+## Runtime Behavior
 
-1. Ask for desired default package type and platform preset.
-2. Ask which version profile should be default.
-3. Ask whether `git init` should remain default.
-4. Ask whether `AGENTS.md` should always be copied.
-5. Ask for naming pattern constraints and confirm final merged settings.
+- `scripts/customization_config.py` reads, writes, resets, and reports customization state.
+- `scripts/bootstrap_swift_package.sh` does not auto-load any knob in this file today.
+- If a future change must enforce a knob automatically, update both the script and this document.
 
-## File Mapping
+## Update Flow
 
-- `SKILL.md`: operator-facing defaults.
-- `scripts/bootstrap_swift_package.sh`: runtime behavior.
-- `references/package-types.md`: type/profile guidance.
-- `references/automation-prompts.md`: automation defaults.
-- `customization.template.yaml`: default knobs.
-- `scripts/customization_config.py`: durable config load/apply/reset.
+1. Inspect current settings with `uv run python scripts/customization_config.py effective`.
+2. Update `SKILL.md`, `references/package-types.md`, and `references/automation-prompts.md` to reflect the approved policy change.
+3. Persist the metadata change with `uv run python scripts/customization_config.py apply --input <yaml-file>`.
+4. Re-run `uv run python scripts/customization_config.py effective` and confirm the stored values match the docs.
+5. Use `uv run python scripts/customization_config.py reset` only when the user explicitly wants to clear customization state.
 
-## Runtime Behavior Note
+## Validation
 
-These knobs are policy defaults stored as customization metadata. The bootstrap script does not auto-load all settings; wire runtime behavior intentionally when a knob must be enforced automatically.
-
-## Guardrails
-
-- Keep bootstrap deterministic.
-- Keep docs aligned with script behavior.
-- Keep `assets/AGENTS.md` aligned with `shared/agents-snippets/apple-swift-core.md` baseline expectations.
-- Avoid introducing destructive defaults.
-
-## Validation Checklist
-
-- Run bootstrap once with defaults and once with explicit overrides.
-- Verify generated structure and platform profile expectations.
-- Run `uv run python scripts/customization_config.py effective`.
-
-## Example Customization Requests
-
-- "Default to executable packages for this team."
-- "Disable automatic git initialization unless explicitly requested."
-- "Make AGENTS.md copy-in opt-in instead of default."
+1. Run the bootstrap workflow once with defaults.
+2. Run the bootstrap workflow once with explicit overrides.
+3. Verify `Package.swift`, `.git`, `AGENTS.md`, and `Tests/` exist.
+4. Verify the docs do not claim that customization state changes runtime behavior automatically.
