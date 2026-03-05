@@ -2,7 +2,7 @@
 
 Codex skills for Apple development workflows focused on Swift, Xcode, Dash docs, and repository policy maintenance.
 
-## v2.0.0 Skill Set
+## v2.0.0 Highlights
 
 This repository now exposes five canonical skills:
 
@@ -75,15 +75,14 @@ Keep workflow orchestration and tool-routing policies in skills.
 .
 ├── README.md
 ├── ROADMAP.md
-├── apple-skills-routing/
-│   └── apple-skills-router-advise-install/
-├── swift-xcode-tools/
-│   └── apple-xcode-workflow-execute/
-├── dash-apple-swift-documentation/
-│   └── apple-dash-docset-manage/
-├── apple-swift-bootstraps/
-│   └── apple-swift-package-bootstrap/
-└── apple-swift-repo-tools/
+├── shared/
+│   └── agents-snippets/
+│       └── apple-swift-core.md
+└── skills/
+    ├── apple-skills-router-advise-install/
+    ├── apple-xcode-workflow-execute/
+    ├── apple-dash-docset-manage/
+    ├── apple-swift-package-bootstrap/
     └── apple-swift-package-agents-sync/
 ```
 

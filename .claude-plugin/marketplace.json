@@ -4,38 +4,14 @@
   },
   "plugins": [
     {
-      "name": "swift-xcode-tools",
-      "source": "./swift-xcode-tools",
+      "name": "skills",
+      "source": "./skills",
       "skills": [
-        "./apple-xcode-workflow-execute"
-      ]
-    },
-    {
-      "name": "dash-apple-swift-documentation",
-      "source": "./dash-apple-swift-documentation",
-      "skills": [
-        "./apple-dash-docset-manage"
-      ]
-    },
-    {
-      "name": "apple-swift-repo-tools",
-      "source": "./apple-swift-repo-tools",
-      "skills": [
+        "./apple-skills-router-advise-install",
+        "./apple-xcode-workflow-execute",
+        "./apple-dash-docset-manage",
+        "./apple-swift-package-bootstrap",
         "./apple-swift-package-agents-sync"
-      ]
-    },
-    {
-      "name": "apple-swift-bootstraps",
-      "source": "./apple-swift-bootstraps",
-      "skills": [
-        "./apple-swift-package-bootstrap"
-      ]
-    },
-    {
-      "name": "apple-skills-routing",
-      "source": "./apple-skills-routing",
-      "skills": [
-        "./apple-skills-router-advise-install"
       ]
     }
   ]
