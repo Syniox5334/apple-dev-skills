@@ -10,6 +10,7 @@
 - `swift` and `git` available on `PATH`.
 - Write access to `<DESTINATION_DIR>`.
 - `assets/AGENTS.md` and `scripts/bootstrap_swift_package.sh` present in this skill.
+- `assets/AGENTS.md` is treated as the full template including shared `apple-swift-core` baseline guidance.
 - Explicit values prepared for required placeholders.
 
 ## Codex App Automation Prompt Template

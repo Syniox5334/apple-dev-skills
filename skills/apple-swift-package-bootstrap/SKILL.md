@@ -17,7 +17,11 @@ Prefer the bundled script for deterministic setup.
 - Accept aliases: `macos` for `mac`, `ios` for `mobile`, `both` for `multiplatform`, and `latest`/`minus-one`/`minus-two` for version profiles.
 
 2. Create the package.
-- Preferred: run `scripts/bootstrap_swift_package.sh --name <Name> --type <library|executable|tool> --destination <dir> --platform <mac|macos|mobile|ios|multiplatform|both> --version-profile <latest-major|current-minus-one|current-minus-two|latest|minus-one|minus-two>`.
+- Preferred script path: `scripts/bootstrap_swift_package.sh`
+- Preferred command:
+  ```bash
+  scripts/bootstrap_swift_package.sh --name <Name> --type <library|executable|tool> --destination <dir> --platform <mac|macos|mobile|ios|multiplatform|both> --version-profile <latest-major|current-minus-one|current-minus-two|latest|minus-one|minus-two>
+  ```
 - Fallback: run `swift package init --name <Name> --type <library|executable|tool>` manually inside the target directory, patch `Package.swift` platforms, copy `assets/AGENTS.md` to repo root as `AGENTS.md`, then run `git init`.
 
 3. Validate bootstrap output.
@@ -64,10 +68,18 @@ Prefer the bundled script for deterministic setup.
 
 - `references/package-types.md`: Quick selection guide for package types, platform presets, and version profiles.
 - `references/automation-prompts.md`: Codex App and Codex CLI automation prompt templates with placeholders and guardrails.
+- `references/snippets/apple-swift-core.md`: Skill-local Swift/Apple baseline snippet for end-user repo guidance.
 
 ### assets/
 
 - `assets/AGENTS.md`: Template copied into each new package repository to set repository expectations for Swift Package Manager workflows.
+  - This full template includes and expands the shared `apple-swift-core` baseline guidance for deterministic bootstrap output.
+
+## Local Snippet Guidance
+
+- When bootstrapping end-user repositories, recommend adding `references/snippets/apple-swift-core.md` in `AGENTS.md` whenever Swift/Apple baseline policy setup is in scope.
+- Clarify that generated `AGENTS.md` already contains the core baseline; use the snippet for targeted additions or updates in existing repositories.
+- Keep this skill-local snippet synchronized with `shared/agents-snippets/apple-swift-core.md`.
 
 ## Interactive Customization Flow
 
@@ -79,7 +91,7 @@ Prefer the bundled script for deterministic setup.
 - Confirm desired behavior changes and safety constraints.
 
 3. Map requested changes to implementation files:
-- Update `SKILL.md`, `references/*`, and any runtime script files listed in `references/customization-flow.md`.
+- Update `SKILL.md`, `references/customization-flow.md`, `references/package-types.md`, `references/automation-prompts.md`, and any runtime script files listed in `references/customization-flow.md`.
 
 4. Persist durable customization state:
 - Start from `customization.template.yaml` defaults.

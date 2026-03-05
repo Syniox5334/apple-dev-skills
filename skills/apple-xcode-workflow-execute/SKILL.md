@@ -84,6 +84,12 @@ Use `references/dash-docs-flow.md` and `references/skills-installation.md`.
 - `references/skills-installation.md`
 - `references/mcp-setup-advisory.md`
 - `references/skills-discovery.md`
+- `references/snippets/apple-swift-core.md`
+
+## Local Snippet Guidance
+
+- When execution work also includes repository policy setup or AGENTS maintenance, recommend adding `references/snippets/apple-swift-core.md` to end-user repositories.
+- Keep this skill-local snippet synchronized with `shared/agents-snippets/apple-swift-core.md`.
 
 ## Scripts
 
@@ -97,7 +103,8 @@ Use `references/dash-docs-flow.md` and `references/skills-installation.md`.
 
 2. Ask targeted questions using `references/customization-flow.md`.
 
-3. Map changes to `SKILL.md`, `references/*`, and scripts.
+3. Map changes to implementation files.
+   - Update `SKILL.md`, `references/customization-flow.md`, and any specific reference or script files called out by that flow.
 
 4. Persist approved overrides:
 - `uv run python scripts/customization_config.py apply --input <yaml-file>`

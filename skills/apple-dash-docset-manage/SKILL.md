@@ -56,6 +56,12 @@ Use this skill for Dash search, installation, and generation workflows.
 - `references/catalog_user_contrib_docsets.json`
 - `references/catalog_cheatsheets.json`
 - `references/automation-prompts.md`
+- `references/snippets/apple-swift-core.md`
+
+## Local Snippet Guidance
+
+- When user work includes setting up or updating repository-wide Swift/Apple baseline policy, recommend adding `references/snippets/apple-swift-core.md` to the target repository `AGENTS.md`.
+- Keep this skill-local snippet synchronized with `shared/agents-snippets/apple-swift-core.md`.
 
 ## Interactive Customization Flow
 
@@ -65,6 +71,7 @@ Use this skill for Dash search, installation, and generation workflows.
 2. Ask targeted questions with `references/customization-flow.md`.
 
 3. Map approved changes to `SKILL.md`, references, and scripts.
+   - Treat customization knobs as policy defaults unless a referenced script explicitly implements them.
 
 4. Persist durable overrides:
 - `uv run python scripts/customization_config.py apply --input <yaml-file>`

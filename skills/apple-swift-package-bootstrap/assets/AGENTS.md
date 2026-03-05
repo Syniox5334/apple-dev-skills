@@ -1,5 +1,11 @@
 # AGENTS.md
 
+## Baseline Provenance
+
+- This template is the full bootstrap `AGENTS.md` used for new Swift package repositories.
+- It intentionally incorporates the shared Swift/Apple baseline from `shared/agents-snippets/apple-swift-core.md`.
+- Keep baseline guidance aligned with the shared snippet and use this template for deterministic scaffold output.
+
 ## Repository Expectations
 
 - Use Swift Package Manager (SPM) as the source of truth for package structure and dependencies.

@@ -16,7 +16,15 @@ Use this file to customize policy knobs for MCP-first routing, fallback behavior
 - `customization.template.yaml`: defaults
 - durable state: `~/.config/gaelic-ghost/apple-dev-skills/apple-xcode-workflow-execute/customization.yaml`
 - `SKILL.md`: workflow policy wording
-- `references/*.md`: routing and fallback detail
+- `references/mcp-tool-matrix.md`: MCP routing detail
+- `references/cli-fallback-matrix.md`: fallback command detail
+- `references/mutation-risk-policy.md`: mutation safety detail
+- `references/dash-docs-flow.md`: docs routing detail
+- `scripts/customization_config.py`: durable config load/apply/reset
+
+## Runtime Behavior Note
+
+These knobs are policy defaults stored as customization metadata. Runtime tooling in this skill does not auto-load all knob values unless explicitly wired.
 
 ## Validation
 

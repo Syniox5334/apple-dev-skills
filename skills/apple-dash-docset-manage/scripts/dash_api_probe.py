@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 from typing import Any
@@ -28,7 +29,27 @@ def _read_json_url(url: str, timeout: float = 2.0) -> tuple[bool, Any]:
         return False, None
 
 
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--status-file",
+        default=str(STATUS_FILE),
+        help="Path to Dash status.json file",
+    )
+    parser.add_argument(
+        "--timeout",
+        type=float,
+        default=2.0,
+        help="HTTP timeout in seconds for Dash API probes",
+    )
+    return parser
+
+
 def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+
+    status_file = Path(args.status_file).expanduser()
     result: dict[str, Any] = {
         "status_file_port": None,
         "health_ok": False,
@@ -38,7 +59,7 @@ def main() -> int:
     }
 
     try:
-        status_data = json.loads(STATUS_FILE.read_text(encoding="utf-8"))
+        status_data = json.loads(status_file.read_text(encoding="utf-8"))
         port = status_data.get("port")
         if isinstance(port, int):
             result["status_file_port"] = port
@@ -48,11 +69,11 @@ def main() -> int:
         return 0
 
     base_url = result["base_url"]
-    ok_health, health = _read_json_url(f"{base_url}/health")
+    ok_health, health = _read_json_url(f"{base_url}/health", timeout=args.timeout)
     if ok_health and isinstance(health, dict) and health.get("status") == "ok":
         result["health_ok"] = True
 
-    ok_schema, schema = _read_json_url(f"{base_url}/schema")
+    ok_schema, schema = _read_json_url(f"{base_url}/schema", timeout=args.timeout)
     if ok_schema and isinstance(schema, dict):
         result["schema_ok"] = True
         paths = schema.get("paths", {})

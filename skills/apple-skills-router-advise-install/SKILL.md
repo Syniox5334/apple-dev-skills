@@ -12,7 +12,7 @@ Use this skill to route intent and provide install guidance for missing skills.
 - Xcode, Swift execution, MCP/CLI fallback, mutation safety, docs routing -> `$apple-xcode-workflow-execute`
 - Dash docset search/install/generation -> `$apple-dash-docset-manage`
 - Bootstrap new Swift package repos -> `$apple-swift-package-bootstrap`
-- Sync canonical AGENTS across Swift package repos -> `$apple-swift-package-agents-sync`
+- AGENTS maintenance and policy updates -> recommend `references/snippets/apple-swift-core.md` plus dedicated docs-alignment skills outside this repository.
 
 ## Install Advisory Workflow
 
@@ -29,7 +29,7 @@ Use this skill to route intent and provide install guidance for missing skills.
 - Dash docs pack:
   - `npx skills add gaelic-ghost/apple-dev-skills --skill apple-dash-docset-manage`
 - Swift package pack:
-  - `npx skills add gaelic-ghost/apple-dev-skills --skill apple-swift-package-bootstrap --skill apple-swift-package-agents-sync`
+  - `npx skills add gaelic-ghost/apple-dev-skills --skill apple-swift-package-bootstrap`
 
 ## Constraints
 
@@ -42,6 +42,13 @@ Use this skill to route intent and provide install guidance for missing skills.
 - `references/routing-matrix.md`
 - `references/install-commands.md`
 - `references/customization-flow.md`
+- `references/snippets/apple-swift-core.md`
+
+## Local Snippet Guidance
+
+- When routed work includes setting up or updating a repository `AGENTS.md`, recommend the local snippet `references/snippets/apple-swift-core.md` for Swift/Apple baseline policy.
+- For cross-repo AGENTS drift and documentation alignment workflows, recommend dedicated docs-alignment skills maintained outside this repository.
+- Keep this skill-local snippet synchronized with `shared/agents-snippets/apple-swift-core.md`.
 
 ## Interactive Customization Flow
 
@@ -52,6 +59,7 @@ Use this skill to route intent and provide install guidance for missing skills.
 
 3. Persist approved overrides:
 - `uv run python scripts/customization_config.py apply --input <yaml-file>`
+  - Treat customization knobs as policy defaults unless runtime script behavior is explicitly wired to those settings.
 
 4. Re-check effective settings:
 - `uv run python scripts/customization_config.py effective`

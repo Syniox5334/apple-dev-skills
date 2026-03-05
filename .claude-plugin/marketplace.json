@@ -10,8 +10,7 @@
         "./apple-skills-router-advise-install",
         "./apple-xcode-workflow-execute",
         "./apple-dash-docset-manage",
-        "./apple-swift-package-bootstrap",
-        "./apple-swift-package-agents-sync"
+        "./apple-swift-package-bootstrap"
       ]
     }
   ]

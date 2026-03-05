@@ -15,4 +15,4 @@
 - Dash docs:
   `npx skills add gaelic-ghost/apple-dev-skills --skill apple-dash-docset-manage`
 - Swift package tools:
-  `npx skills add gaelic-ghost/apple-dev-skills --skill apple-swift-package-bootstrap --skill apple-swift-package-agents-sync`
+  `npx skills add gaelic-ghost/apple-dev-skills --skill apple-swift-package-bootstrap`

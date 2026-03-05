@@ -1,4 +1,0 @@
-interface:
-  display_name: "Apple Swift Package AGENTS Sync"
-  short_description: "Synchronize canonical AGENTS.md across Swift package repos"
-  default_prompt: "Use apple-swift-package-agents-sync to detect or apply AGENTS.md drift across Swift package repositories with script-driven check/apply modes."

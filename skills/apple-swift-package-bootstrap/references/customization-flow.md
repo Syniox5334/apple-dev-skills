@@ -3,6 +3,7 @@
 ## Purpose
 
 Adjust bootstrap defaults and generation behavior for team-specific Swift package conventions.
+Treat generated `AGENTS.md` as the full scaffold policy file that incorporates the shared `apple-swift-core` baseline.
 
 ## Customization Knobs
 
@@ -30,10 +31,15 @@ Adjust bootstrap defaults and generation behavior for team-specific Swift packag
 - `customization.template.yaml`: default knobs.
 - `scripts/customization_config.py`: durable config load/apply/reset.
 
+## Runtime Behavior Note
+
+These knobs are policy defaults stored as customization metadata. The bootstrap script does not auto-load all settings; wire runtime behavior intentionally when a knob must be enforced automatically.
+
 ## Guardrails
 
 - Keep bootstrap deterministic.
 - Keep docs aligned with script behavior.
+- Keep `assets/AGENTS.md` aligned with `shared/agents-snippets/apple-swift-core.md` baseline expectations.
 - Avoid introducing destructive defaults.
 
 ## Validation Checklist
