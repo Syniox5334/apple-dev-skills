@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 SCHEMA_VERSION = 1
-SKILL_NAME = "dash-docset-install-generate"
+SKILL_NAME = "apple-dash-docset-manage"
 CONFIG_HOME_ENV = "APPLE_DEV_SKILLS_CONFIG_HOME"
 DEFAULT_CONFIG_ROOT = "~/.config/gaelic-ghost/apple-dev-skills"
 ALLOWED_TOP_LEVEL = {"schemaVersion", "isCustomized", "settings"}

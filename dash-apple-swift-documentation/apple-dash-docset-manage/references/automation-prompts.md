@@ -15,7 +15,7 @@
 ## Codex App Automation Prompt Template
 
 ```text
-Use $dash-docset-search.
+Use $apple-dash-docset-manage.
 
 Run a Dash discovery/search workflow with:
 - Query: <QUERY>
@@ -45,7 +45,7 @@ Output requirements:
 ## Codex CLI Automation Prompt Template
 
 ```text
-Use $dash-docset-search for a non-interactive CLI run.
+Use $apple-dash-docset-manage for a non-interactive CLI run.
 
 Task:
 1) Probe Dash access path.
@@ -80,7 +80,7 @@ Return format:
 - Stop with `blocked` if neither MCP nor local API nor URL fallback is usable.
 - Do not invent docset identifiers; resolve from installed docsets.
 - Do not enable FTS when status is `not supported`.
-- Do not switch to install behavior; hand off to `$dash-docset-install-generate` when needed.
+- Do not switch to install behavior; hand off to `$apple-dash-docset-manage` when needed.
 
 ## Expected Output Shape
 
